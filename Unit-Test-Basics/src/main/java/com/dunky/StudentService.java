@@ -21,4 +21,11 @@ public class StudentService {
                 .findFirst()
                 .orElse(null);
     }
+
+    public String[] getStudentNamesByDepartment(String department){
+        return students.stream()
+                .filter((s) -> s.getDepartment().equals(department))
+                .map(Student::getName)
+                .toArray(String[]::new);
+    }
 }
