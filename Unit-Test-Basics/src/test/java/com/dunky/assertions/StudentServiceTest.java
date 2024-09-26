@@ -32,7 +32,7 @@ class StudentServiceTest {
         Student actualObject = studentService.getStudentById(2);
         assertNotNull(actualObject, ()-> "Student is not null");
 
-        assertEquals("Dunky Opiyo", student.getName(), "Student name is not equal");
+        assertEquals("Dunky Opiyo", student.getName(), () -> "Student name is not equal");
     }
 
 }
