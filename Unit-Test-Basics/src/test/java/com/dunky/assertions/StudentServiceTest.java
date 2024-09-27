@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Student Service Tests")
 class StudentServiceTest {
 
-    StudentService studentService;
+    private StudentService studentService;
 
     @BeforeEach
     void setUp(){
