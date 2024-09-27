@@ -38,17 +38,7 @@ class StudentServiceTest {
 
     @Test
     public void getStudentNamesByDepartmentTest(){
-        StudentService studentService = new StudentService();
-
-        Student student1 = new Student(1, "OpenAI ChatGPT", "Computer Science");
-        Student student2 = new Student(2, "Google Gemini", "Computer Science");
-        Student student3 = new Student(3, "Anthropic Claude", "Mathematics");
-        Student student4 = new Student(4, "Meta Llama3", "Computer Science");
-
-        studentService.addStudent(student1);
-        studentService.addStudent(student2);
-        studentService.addStudent(student3);
-        studentService.addStudent(student4);
+        StudentService studentService = getStudentService();
 
         String[] actualArrayNames = studentService.getStudentNamesByDepartment("Computer Science");
         String[] expectedArray = {"OpenAI ChatGPT", "Google Gemini", "Meta Llama3"};
@@ -60,6 +50,17 @@ class StudentServiceTest {
 
     @Test
     public void getStudentNameListByDepartmentTest(){
+        StudentService studentService = getStudentService();
+
+        List<String> expectedNameList = studentService.getStudentNameListByDepartment("Computer Science");
+        List<String> actualNameList = Arrays.asList("OpenAI ChatGPT", "Google Gemini","Meta Llama3" );
+
+        assertIterableEquals(expectedNameList, actualNameList, () -> "Student name list not equal" ); // Both
+        // Iterables are deeply equal.
+
+    }
+
+    private static StudentService getStudentService() {
         StudentService studentService = new StudentService();
 
         Student student1 = new Student(1, "OpenAI ChatGPT", "Computer Science");
@@ -71,12 +72,7 @@ class StudentServiceTest {
         studentService.addStudent(student2);
         studentService.addStudent(student3);
         studentService.addStudent(student4);
-
-        List<String> expectedNameList = studentService.getStudentNameListByDepartment("Computer Science");
-        List<String> actualNameList = Arrays.asList("OpenAI ChatGPT", "Google Gemini","Meta Llama3" );
-
-        assertIterableEquals(expectedNameList, actualNameList, () -> "Student name list not equal" );
-
+        return studentService;
     }
 
 }
