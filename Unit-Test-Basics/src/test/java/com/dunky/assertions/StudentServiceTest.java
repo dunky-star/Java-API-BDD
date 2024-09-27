@@ -3,9 +3,7 @@ package com.dunky.assertions;
 import com.dunky.Student;
 import com.dunky.StudentNotFoundException;
 import com.dunky.StudentService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Student Service Tests")
 class StudentServiceTest {
 
-    private StudentService studentService;
+    private static StudentService studentService;
 
-    @BeforeEach
-    void setUp(){
+    @BeforeAll
+    static void setUp(){
         studentService = new StudentService();
 
         Student student1 = new Student(1, "OpenAI ChatGPT", "Computer Science");
@@ -30,6 +28,11 @@ class StudentServiceTest {
         studentService.addStudent(student2);
         studentService.addStudent(student3);
         studentService.addStudent(student4);
+    }
+
+    @AfterAll
+    static void tearDown(){
+        studentService = null;
     }
 
     @DisplayName("Test getting list of student")

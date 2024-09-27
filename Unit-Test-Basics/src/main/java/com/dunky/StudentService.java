@@ -37,10 +37,10 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public Student getStudentByName(String name){
-        return students.stream()
+    public void getStudentByName(String name){
+        students.stream()
                 .filter((s) -> s.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new StudentNotFoundException("Student not found with name: " +name));
+                .orElseThrow(() -> new StudentNotFoundException("Student not found with name: " + name));
     }
 }
