@@ -3,6 +3,7 @@ package com.dunky.assertions;
 import com.dunky.Student;
 import com.dunky.StudentNotFoundException;
 import com.dunky.StudentService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,23 +15,37 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Student Service Tests")
 class StudentServiceTest {
 
+    StudentService studentService;
+
+    @BeforeEach
+    void setUp(){
+        studentService = new StudentService();
+
+        Student student1 = new Student(1, "OpenAI ChatGPT", "Computer Science");
+        Student student2 = new Student(2, "Google Gemini", "Computer Science");
+        Student student3 = new Student(3, "Anthropic Claude", "Mathematics");
+        Student student4 = new Student(4, "Meta Llama3", "Computer Science");
+
+        studentService.addStudent(student1);
+        studentService.addStudent(student2);
+        studentService.addStudent(student3);
+        studentService.addStudent(student4);
+    }
+
     @DisplayName("Test getting list of student")
     @Test
     public void getStudentTest(){
-        StudentService studentService = new StudentService();
 
         List<Student> listOfStudent = studentService.getStudents();
 
         boolean actualResult = listOfStudent.isEmpty();
 
-        assertTrue(() -> actualResult, () -> "List of student is empty!"); // Lazy evaluation using
+        assertFalse(() -> actualResult, () -> "List of student is empty!"); // Lazy evaluation using
                                                                            // Supplier Functional Interface.
     }
 
     @Test
     public void getStudentByIdTest(){
-        StudentService studentService = new StudentService();
-
         Student student = new Student(2, "Dunky Opiyo");
         studentService.addStudent(student);
 
@@ -42,48 +57,24 @@ class StudentServiceTest {
 
     @Test
     public void getStudentNamesByDepartmentTest(){
-        StudentService studentService = getStudentService();
-
         String[] actualArrayNames = studentService.getStudentNamesByDepartment("Computer Science");
         String[] expectedArray = {"OpenAI ChatGPT", "Google Gemini", "Meta Llama3"};
 
         assertArrayEquals(expectedArray, actualArrayNames, () -> "Student names are not equal");
-
-
     }
 
     @Test
     public void getStudentNameListByDepartmentTest(){
-        StudentService studentService = getStudentService();
-
         List<String> expectedNameList = studentService.getStudentNameListByDepartment("Computer Science");
         List<String> actualNameList = Arrays.asList("OpenAI ChatGPT", "Google Gemini","Meta Llama3" );
-
         assertIterableEquals(expectedNameList, actualNameList, () -> "Student name list not equal" ); // Both
         // Iterables are deeply equal.
 
     }
 
-    private static StudentService getStudentService() {
-        StudentService studentService = new StudentService();
-
-        Student student1 = new Student(1, "OpenAI ChatGPT", "Computer Science");
-        Student student2 = new Student(2, "Google Gemini", "Computer Science");
-        Student student3 = new Student(3, "Anthropic Claude", "Mathematics");
-        Student student4 = new Student(4, "Meta Llama3", "Computer Science");
-
-        studentService.addStudent(student1);
-        studentService.addStudent(student2);
-        studentService.addStudent(student3);
-        studentService.addStudent(student4);
-        return studentService;
-    }
-
     @DisplayName("Test getting a student by name")
     @Test
     public void getStudentByNameTest(){
-        StudentService studentService = getStudentService();
-
         assertThrows(StudentNotFoundException.class, () -> {
             studentService.getStudentByName("Kaligs");
         }, () -> "StudentNotFoundException should be thrown, but it wasn't.");
