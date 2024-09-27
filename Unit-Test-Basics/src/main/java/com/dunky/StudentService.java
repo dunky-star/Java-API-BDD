@@ -2,6 +2,7 @@ package com.dunky;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentService {
 
@@ -27,5 +28,12 @@ public class StudentService {
                 .filter((s) -> s.getDepartment().equals(department))
                 .map(Student::getName)
                 .toArray(String[]::new);
+    }
+
+    public List<String> getStudentNameListByDepartment(String department){
+        return students.stream()
+                .filter((s) -> s.getDepartment().equals(department))
+                .map(Student::getName)
+                .collect(Collectors.toList());
     }
 }
