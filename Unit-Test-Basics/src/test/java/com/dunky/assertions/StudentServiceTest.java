@@ -1,7 +1,9 @@
 package com.dunky.assertions;
 
 import com.dunky.Student;
+import com.dunky.StudentNotFoundException;
 import com.dunky.StudentService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,8 +11,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Student Service Tests")
 class StudentServiceTest {
 
+    @DisplayName("Test getting list of student")
     @Test
     public void getStudentTest(){
         StudentService studentService = new StudentService();
@@ -73,6 +77,16 @@ class StudentServiceTest {
         studentService.addStudent(student3);
         studentService.addStudent(student4);
         return studentService;
+    }
+
+    @DisplayName("Test getting a student by name")
+    @Test
+    public void getStudentByNameTest(){
+        StudentService studentService = getStudentService();
+
+        assertThrows(StudentNotFoundException.class, () -> {
+            studentService.getStudentByName("Kaligs");
+        }, () -> "StudentNotFoundException should be thrown, but it wasn't.");
     }
 
 }
