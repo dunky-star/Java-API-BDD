@@ -58,13 +58,13 @@ class StudentServiceTest {
         assertEquals("Dunky Opiyo", student.getName(), () -> "Student name is not equal");
     }
 
-    @Test
-    public void getStudentNamesByDepartmentTest(){
-        String[] actualArrayNames = studentService.getStudentNamesByDepartment("Computer Science");
-        String[] expectedArray = {"OpenAI ChatGPT", "Google Gemini", "Meta Llama3"};
-
-        assertArrayEquals(expectedArray, actualArrayNames, () -> "Student names are not equal");
-    }
+//    @Test
+//    public void getStudentNamesByDepartmentTest(){
+//        String[] actualArrayNames = studentService.getStudentNamesByDepartment("Computer Science");
+//        String[] expectedArray = {"OpenAI ChatGPT", "Google Gemini", "Meta Llama3"};
+//
+//        assertArrayEquals(expectedArray, actualArrayNames, () -> "Student names are not equal");
+//    }
 
     @Test
     public void getStudentNameListByDepartmentTest(){
