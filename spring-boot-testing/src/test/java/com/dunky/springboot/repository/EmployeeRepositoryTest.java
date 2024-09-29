@@ -2,6 +2,8 @@ package com.dunky.springboot.repository;
 
 import com.dunky.springboot.model.Employee;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -12,6 +14,8 @@ public class EmployeeRepositoryTest {
     private EmployeeRepository employeeRepository;
 
     // JUnit test for save employee operation
+    @DisplayName("JUnit test for save employee operation")
+    @Test
     public void givenEmployeeObject_whenSave_thenReturnSavedEmployee(){
 
         // given - precondition or setup
@@ -26,6 +30,7 @@ public class EmployeeRepositoryTest {
 
         // then - verify the output
         Assertions.assertThat(savedEmployee).isNotNull();
+        Assertions.assertThat(savedEmployee.getId()).isGreaterThan(0);
 
     }
 
