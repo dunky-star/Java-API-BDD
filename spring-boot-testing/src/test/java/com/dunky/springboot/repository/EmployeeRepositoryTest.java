@@ -130,7 +130,7 @@ public class EmployeeRepositoryTest {
         Employee updatedEmployee = employeeRepository.save(employeeToUpdate);
 
         // then - verify the output
-        assertThat(updatedEmployee.getFirstName()).isEqualTo("Kwaro");
+        assertThat(updatedEmployee.getFirstName()).isEqualTo("Kal");
         assertThat(updatedEmployee.getEmail()).isEqualTo("kwaro@mail.com");
 
     }
