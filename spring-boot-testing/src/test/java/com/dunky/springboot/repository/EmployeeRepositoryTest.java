@@ -126,12 +126,12 @@ public class EmployeeRepositoryTest {
         // when - action or the behavior that we are going to test
         Employee employeeToUpdate = employeeRepository.findByEmail(employee.getEmail()).get(); // Because it returns optional
         employeeToUpdate.setFirstName("Kal");
-        employeeToUpdate.setEmail("kworo@mail.com");
+        employeeToUpdate.setEmail("kwaro@mail.com");
         Employee updatedEmployee = employeeRepository.save(employeeToUpdate);
 
         // then - verify the output
-        assertThat(updatedEmployee.getLastName()).isEqualTo("Kwaro");
-        assertThat(updatedEmployee.getEmail()).isEqualTo("kworo@mail.com");
+        assertThat(updatedEmployee.getFirstName()).isEqualTo("Kwaro");
+        assertThat(updatedEmployee.getEmail()).isEqualTo("kwaro@mail.com");
 
     }
 
