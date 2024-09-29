@@ -1,7 +1,7 @@
 package com.dunky.springboot.repository;
 
 import com.dunky.springboot.model.Employee;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class EmployeeRepositoryTest {
         Employee savedEmployee = employeeRepository.save(employee);
 
         // then - verify the output
-        Assertions.assertThat(savedEmployee).isNotNull();
-        Assertions.assertThat(savedEmployee.getId()).isGreaterThan(0);
+        assertThat(savedEmployee).isNotNull();
+        assertThat(savedEmployee.getId()).isGreaterThan(0);
 
     }
 
