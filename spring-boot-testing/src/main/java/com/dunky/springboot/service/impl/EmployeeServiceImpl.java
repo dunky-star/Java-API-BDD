@@ -4,7 +4,6 @@ import com.dunky.springboot.exception.ResourceNotFoundException;
 import com.dunky.springboot.model.Employee;
 import com.dunky.springboot.repository.EmployeeRepository;
 import com.dunky.springboot.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,8 +11,13 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
+
     private EmployeeRepository employeeRepository;
+
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public Employee saveEmployee(Employee employee) {
