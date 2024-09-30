@@ -37,4 +37,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+    @Override
+    public Optional<Employee> getEmployeeById(long id) {
+        return employeeRepository.findById(id);
+    }
+
+    @Override
+    public Employee updateEmployee(Employee updatedEmployee) {
+        return employeeRepository.save(updatedEmployee);
+    }
+
+    @Override
+    public void deleteEmployee(long id) {
+        employeeRepository.deleteById(id);
+    }
+
 }
