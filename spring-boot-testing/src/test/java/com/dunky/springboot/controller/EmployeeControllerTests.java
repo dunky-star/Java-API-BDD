@@ -12,6 +12,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.http.MediaType;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -57,6 +60,26 @@ public class EmployeeControllerTests {
                         is(employee.getLastName())))
                 .andExpect(jsonPath("$.email",
                         is(employee.getEmail())));
+
+    }
+
+    // JUnit test for Get All employees REST API
+    @Test
+    public void givenListOfEmployees_whenGetAllEmployees_thenReturnEmployeesList() throws Exception{
+        // given - precondition or setup
+        List<Employee> listOfEmployees = new ArrayList<>();
+        listOfEmployees.add(Employee.builder().firstName("Geo").lastName("Opi").email("opi@gmail.com").build());
+        listOfEmployees.add(Employee.builder().firstName("Cozy").lastName("Glare").email("glare@gmail.com").build());
+        given(employeeService.getAllEmployees()).willReturn(listOfEmployees);
+
+        // when -  action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(get("/api/employees"));
+
+        // then - verify the output
+        response.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.size()",
+                        is(listOfEmployees.size())));
 
     }
 }
